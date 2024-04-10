@@ -12,6 +12,7 @@ def filter_datum(fields: List[str],
         message = re.sub(f"(?<={i}=)(.*?)(?={separator})", redaction, message)
     return message
 
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
         """
@@ -27,4 +28,3 @@ class RedactingFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         """format method"""
         pass
-
