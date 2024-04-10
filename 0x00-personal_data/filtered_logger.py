@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+"""
+logging module
+"""
+import re
+
+
+def filter_datum(fields: list, redaction: str, message: str, separator: str):
+    """filter function"""
+    for i in fields:
+        message = re.sub(f"(?<={i}=)(.*?)(?={separator})", redaction, message)
+    return message
