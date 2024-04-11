@@ -56,3 +56,22 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     connection = mysql.connector.connect(
       host=host, user=user, password=password, database=database)
     return connection
+
+
+def main():
+    """main function"""
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) FROM users;")
+    for row in cursor:
+        log_record = logging.LogRecord("my_logger",
+                                       logging.INFO,
+                                       None, None, row, None, None)
+        formatter = RedactingFormatter(fields=("email", "ssn", "password"))
+        print(formatter.format(log_record))
+    cursor.close()
+    conn.close()
+
+
+if __name__ == '__main__':
+    main()
