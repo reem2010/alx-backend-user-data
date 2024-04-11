@@ -5,7 +5,7 @@ from typing import List
 import logging
 
 
-PII_FIELDS = ("ssn", "password", "ip")
+PII_FIELDS = ("name", "email", "ssn", "password", "ip")
 
 
 def filter_datum(fields: List[str],
