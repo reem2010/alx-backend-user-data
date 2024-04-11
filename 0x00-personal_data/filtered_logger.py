@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """logging module"""
 import re
+import os
 from typing import List
 import logging
+import mysql.connector
 
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
@@ -43,3 +45,14 @@ def get_logger() -> logging.Logger:
     stream = logging.StreamHandler()
     logger.addHandler(stream.setFormatter(RedactingFormatter(PII_FIELDS)))
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """connect to database"""
+    host = os.environ.get('PERSONAL_DATA_DB_HOST')
+    user = os.environ.get('PERSONAL_DATA_DB_USERNAME')
+    password = os.environ.get('PERSONAL_DATA_DB_PASSWORD')
+    database = os.environ.get('PERSONAL_DATA_DB_NAME')
+    connection = mysql.connector.connect(
+      host, user, password, database)
+    return connection
