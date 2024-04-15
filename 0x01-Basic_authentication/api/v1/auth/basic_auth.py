@@ -4,6 +4,7 @@ module for basic auth
 """
 from api.v1.auth.auth import Auth
 import base64
+from typing import Tuple
 
 
 class BasicAuth(Auth):
@@ -33,3 +34,16 @@ class BasicAuth(Auth):
             return decode_bytes.decode('utf-8')
         except Exception as err:
             return None
+
+    def extract_user_credentials(self,
+                                 decoded_base64_authorization_header: str
+                                 ) -> Tuple[str, str]:
+        """extract user method"""
+        if(not(decoded_base64_authorization_header)):
+            return (None, None)
+        if(type(decoded_base64_authorization_header) != str):
+            return (None, None)
+        if(not(":" in decoded_base64_authorization_header)):
+            return (None, None)
+        res = decoded_base64_authorization_header.split(":")
+        return tuple(res)
