@@ -4,6 +4,7 @@
 from api.v1.views import app_views
 from flask import abort, jsonify, request
 from models.user import User
+from api.v1.app import auth
 import os
 
 
@@ -31,3 +32,13 @@ def login() -> str:
         return out
     except Exception as err:
         return jsonify({"error": "no user found for this email"}), 404
+
+
+@app_views.route(
+        '/auth_session/logout',
+        methods=['DELETE'], strict_slashes=False)
+def logout() -> str:
+    """logout method"""
+    if(auth.destroy_session(request)):
+        return jsonify({}), 200
+    abort(404)
