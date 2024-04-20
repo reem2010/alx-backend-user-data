@@ -42,4 +42,4 @@ class SessionExpAuth(SessionAuth):
         expire = created_at + timedelta(seconds=self.session_duration)
         if (expire < datetime.now()):
             return None
-        return session.session.get("user_id")
+        return session.get("user_id")
