@@ -32,9 +32,11 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> User:
         """add user method"""
+        session = self._session
         user = User(email=email, hashed_password=hashed_password)
-        if(self.__session is None):
-            session = self._session
-        self._session.add(user)
-        self._session.commit()
+        # if(self.__session is None):
+        #     session = self._session
+        session.add(user)
+        session.commit()
         return user
+    
