@@ -71,6 +71,16 @@ class Auth:
         except Exception as e:
             raise ValueError
 
+    def update_password(self, reset_token: str, password: str):
+        """update pass"""
+        try:
+            user = self._db.find_user_by(reset_token=reset_token)
+            pas = _hash_password(password)
+            self._db.update_user(user.id, hashed_password=pas)
+            self._db.update_user(user.id, reset_token=None)
+        except Exception as e:
+            raise ValueError
+
 
 def _generate_uuid() -> str:
     """generate uuid"""
