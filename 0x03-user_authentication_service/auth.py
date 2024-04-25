@@ -61,6 +61,16 @@ class Auth:
         self._db.update_user(user_id, session_id=None)
         return None
 
+    def get_reset_password_token(self, email: str) -> str:
+        """reset password"""
+        try:
+            self._db.find_user_by(email=email)
+            token = _generate_uuid()
+            setattr(User, 'reset_token', token)
+            return token
+        except Exception as e:
+            raise ValueError
+
 
 def _generate_uuid() -> str:
     """generate uuid"""
