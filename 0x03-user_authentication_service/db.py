@@ -44,7 +44,7 @@ class DB:
         """find user"""
         if (not kwargs):
             raise InvalidRequestError
-        user = self._session.query(User).filter_by(**kwargs).all()
-        if len(user) == 0:
+        user = self._session.query(User).filter_by(**kwargs).first()
+        if not user:
             raise NoResultFound
-        return user[0]
+        return user
