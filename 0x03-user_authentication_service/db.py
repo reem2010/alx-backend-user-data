@@ -53,7 +53,6 @@ class DB:
         """update user"""
         user = self.find_user_by(id=user_id)
         keys = User.__table__.columns.keys()
-        if (not())
         for key, value in kwargs.items():
             if (not(key in keys)):
                 raise ValueError
