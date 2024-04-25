@@ -52,6 +52,10 @@ class DB:
     def update_user(self, user_id: int, **kwargs):
         """update user"""
         user = self.find_user_by(id=user_id)
+        keys = User.__table__.columns.keys()
+        if (not())
         for key, value in kwargs.items():
+            if (not(key in keys)):
+                raise ValueError
             setattr(user, key, value)
         self._session.commit()
