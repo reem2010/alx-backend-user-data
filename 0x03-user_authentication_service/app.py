@@ -45,10 +45,10 @@ def login():
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout():
     """logout"""
-    session = request.cookies.get('session_id', None)
-    if (session is None):
+    session = request.cookies.get('session_id')
+    if (not session):
         abort(403)
-    user = AUTH.get_user_from_session_id(session)
+    user = AUTH.get_user_from_session_id(session_id=session)
     if user:
         AUTH.destroy_session(user.id)
         redirect('/')
