@@ -48,3 +48,4 @@ class DB:
         if len(user) == 0:
             raise NoResultFound
         return user[0]
+
