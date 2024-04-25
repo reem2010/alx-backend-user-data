@@ -78,6 +78,7 @@ class Auth:
             pas = _hash_password(password)
             self._db.update_user(user.id, hashed_password=pas)
             self._db.update_user(user.id, reset_token=None)
+            return None
         except Exception as e:
             raise ValueError
 
