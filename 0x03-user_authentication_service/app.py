@@ -84,7 +84,7 @@ def get_reset_password_token():
 def update_password():
     """uodate pass"""
     email = request.form.get('email')
-    password = request.form.get('password')
+    password = request.form.get('new_password')
     reset_token = request.form.get('reset_token')
     try:
         AUTH.update_password(reset_token, password)
