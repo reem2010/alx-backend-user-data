@@ -56,6 +56,14 @@ class Auth:
         except Exception as e:
             return None
 
+    def destroy_sessions(self, user_id: int) -> User:
+        """get the user"""
+        try:
+            self._db.update_user(user_id, session_id=None)
+            return None
+        except Exception as e:
+            return None
+
 
 def _generate_uuid() -> str:
     """generate uuid"""
